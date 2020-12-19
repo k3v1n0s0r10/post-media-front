@@ -40,7 +40,7 @@ function App() {
     <div className="App">
       <NavBar />
 
-      <AnimateSharedLayout type="switch">
+      <AnimateSharedLayout type="crossfade">
         <motion.div
           variants={postsAnimation}
           initial="hidden"
