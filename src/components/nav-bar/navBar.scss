@@ -1,0 +1,19 @@
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 3rem;
+  border-bottom: 2px solid lightblue;
+
+  & h1 {
+    font-size: 2rem;
+    color: lightblue;
+  }
+
+  & .links-container {
+    & a {
+      margin: 0 2rem;
+      font-size: 1.4rem;
+    }
+  }
+}

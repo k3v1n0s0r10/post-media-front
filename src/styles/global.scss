@@ -1,0 +1,54 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+input,
+a {
+  font-family: sans-serif;
+  text-decoration: none;
+  color: inherit;
+  outline: none;
+  border: none;
+}
+
+.App {
+  max-width: 130rem;
+  margin: 0 auto;
+
+  & .app-content {
+    height: 80vh;
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .post-open {
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      background-color: #00000010;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
