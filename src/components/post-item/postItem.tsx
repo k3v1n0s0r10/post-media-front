@@ -13,6 +13,7 @@ interface Props {
   setSelected: Dispatch<SetStateAction<{ id: string; idx: string }>>;
   idx: any;
   selected?: boolean;
+  likes: Array<{ username: string }>;
 }
 
 const itemAnimation = {
@@ -33,11 +34,15 @@ const PostItem = ({
   setSelected,
   idx,
   selected,
+  likes,
 }: Props) => {
   const handleClick = () => {
     if (!selected) setSelected({ id: id, idx: idx });
     else setSelected({ id: "", idx: "" });
   };
+
+  const isLiked =
+    likes.filter((like) => like.username.includes("k3v1n0s0r10")).length > 0;
 
   return (
     <motion.div
@@ -58,8 +63,13 @@ const PostItem = ({
       </motion.div>
       <motion.p>{body}</motion.p>
       <motion.div className="post-footer">
-        <motion.p>{likeCount}</motion.p>
-        <motion.p>{commentCount}</motion.p>
+        <motion.p>
+          <i className={isLiked ? "fas fa-heart" : "far fa-heart"} />
+          {likeCount}
+        </motion.p>
+        <motion.p>
+          <i className="far fa-comment" /> {commentCount}
+        </motion.p>
       </motion.div>
     </motion.div>
   );

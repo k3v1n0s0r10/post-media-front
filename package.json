@@ -1,6 +1,7 @@
 {
   "name": "post-media-frontend",
   "version": "0.1.0",
+  "homepage": "https://k3v1n0s0r10.github.io/post-media",
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.3.4",

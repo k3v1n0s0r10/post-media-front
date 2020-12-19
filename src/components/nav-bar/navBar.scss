@@ -2,7 +2,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2rem 3rem;
+  padding: 2rem 1rem;
   border-bottom: 2px solid lightblue;
 
   & h1 {
@@ -15,5 +15,11 @@ nav {
       margin: 0 2rem;
       font-size: 1.4rem;
     }
+  }
+}
+
+@media screen and (min-width: 800px) {
+  nav {
+    padding: 2rem 3rem;
   }
 }

@@ -16,6 +16,9 @@ const getPosts = gql`
       likeCount
       commentCount
       createdAt
+      likes {
+        username
+      }
     }
   }
 `;
