@@ -1,84 +1,51 @@
-import { gql, useQuery } from "@apollo/client";
-import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion";
-import { useState } from "react";
-import Loader from "./components/loader/loader";
-import NavBar from "./components/nav-bar/navBar";
-import PostItem from "./components/post-item/postItem";
+import { useEffect, useState } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import "./styles/global.scss";
+import NavBar from "./components/navBar/NavBar";
+import Home from "./pages/home/home";
+import SignIn from "./pages/sign-in/signIn";
+import SignUp from "./pages/sign-up/signUp";
 
-const getPosts = gql`
-  query {
-    getPosts {
-      id
-      body
-      username
-      likeCount
-      commentCount
-      createdAt
-      likes {
-        username
-      }
+import CheckAuth from "./utils/authRoute";
+import { AuthContext } from "./context/context";
+
+import "./App.scss";
+import CheckAut from "./utils/authRoute";
+
+const App: React.FC = () => {
+  const [auth, setAuth] = useState<any>(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+
+    if (token) setAuth(token);
+  }, []);
+
+  const handleAuthChange = (authState: string | null) => {
+    if (authState) {
+      localStorage.setItem("authToken", authState);
+      setAuth(authState);
+    } else {
+      localStorage.removeItem("authToken");
+      setAuth(null);
     }
-  }
-`;
-
-const postsAnimation = {
-  hidden: { opacity: 1, scale: 0 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      delayChildren: 0.3,
-      staggerChildren: 0.2,
-    },
-  },
-};
-
-function App() {
-  const { data, loading } = useQuery(getPosts);
-  const [selected, setSelected] = useState({ idx: "", id: "" });
+  };
 
   return (
     <div className="App">
-      <NavBar />
-
-      <AnimateSharedLayout type="crossfade">
-        <motion.div
-          variants={postsAnimation}
-          initial="hidden"
-          animate="visible"
-          className="app-content"
-        >
-          {loading ? (
-            <Loader />
-          ) : (
-            data.getPosts.map((el: any, idx: number) => (
-              <PostItem
-                key={el.id}
-                setSelected={setSelected}
-                idx={idx}
-                {...el}
-              />
-            ))
-          )}
-
-          <AnimatePresence>
-            {selected.id && (
-              <motion.div className="post-open" layout>
-                <PostItem
-                  {...data.getPosts[selected.idx]}
-                  idx={selected.idx}
-                  setSelected={setSelected}
-                  selected
-                />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </motion.div>
-      </AnimateSharedLayout>
+      <AuthContext.Provider value={{ auth, handleAuthChange }}>
+        <Router>
+          <NavBar />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <CheckAuth exact path="/sign-in" Component={SignIn} />
+            <CheckAuth exact path="/sign-up" Component={SignUp} />
+            <CheckAut path="*" Component={SignUp} />
+          </Switch>
+        </Router>
+      </AuthContext.Provider>
     </div>
   );
-}
+};
 
 export default App;

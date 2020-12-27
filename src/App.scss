@@ -1,0 +1,35 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: inherit;
+  background-color: #f8f8f8;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+input,
+button,
+a {
+  font-family: sans-serif;
+  text-decoration: none;
+  color: inherit;
+  outline: none;
+  border: none;
+}
+
+:root {
+  --main-blue: #69c1dd;
+}
