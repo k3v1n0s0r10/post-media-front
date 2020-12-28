@@ -1,12 +1,23 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
+import useCreatePost from "../../graphql/useCreatePost";
+import ErrorMessage from "../ErrorMessage";
 import Input from "../formComponents/input/Input";
+
+import "./CreatePost.scss";
 
 const CreatePost: React.FC = () => {
   const [postData, setPostData] = useState<string>("");
+  const { createPost, error, loading } = useCreatePost();
 
   return (
-    <div className="create-post-container">
+    <form
+      onSubmit={(e) => {
+        createPost(e, postData);
+        setPostData("");
+      }}
+      className="create-post-container"
+    >
       <Input
         label="Create Post: "
         name="postData"
@@ -17,8 +28,11 @@ const CreatePost: React.FC = () => {
         }
         required
       />
-      <motion.button>Crear Post</motion.button>
-    </div>
+      <motion.button disabled={loading} type="submit">
+        Create post
+      </motion.button>
+      {error && <ErrorMessage msg={error.message} />}
+    </form>
   );
 };
 

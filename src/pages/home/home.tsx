@@ -1,29 +1,14 @@
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion";
 import React, { useContext, useState } from "react";
 import CreatePost from "../../components/createPost/CreatePost";
 import Loader from "../../components/Loader";
 
 import PostItem from "../../components/postItem/PostItem";
-import { AuthContext } from "../../context/context";
+import { AuthContext } from "../../context/auth";
+import { GET_POSTS_QUERY } from "../../utils/graphql";
 
 import "./home.scss";
-
-const getPosts = gql`
-  query {
-    getPosts {
-      id
-      body
-      username
-      likeCount
-      commentCount
-      createdAt
-      likes {
-        username
-      }
-    }
-  }
-`;
 
 const postsAnimation = {
   hidden: { opacity: 1, scale: 0 },
@@ -38,8 +23,8 @@ const postsAnimation = {
 };
 
 const Home: React.FC = () => {
-  const { auth } = useContext(AuthContext);
-  const { data, loading } = useQuery(getPosts);
+  const { user } = useContext(AuthContext);
+  const { data, loading } = useQuery(GET_POSTS_QUERY);
   const [selected, setSelected] = useState({ idx: "", id: "" });
 
   return (
@@ -50,11 +35,12 @@ const Home: React.FC = () => {
         animate="visible"
         className="home-page"
       >
-        {auth && <CreatePost />}
+        {user && <CreatePost />}
 
         {loading ? (
           <Loader size={10} />
         ) : (
+          data &&
           data.getPosts.map((el: any, idx: number) => (
             <PostItem key={el.id} setSelected={setSelected} idx={idx} {...el} />
           ))

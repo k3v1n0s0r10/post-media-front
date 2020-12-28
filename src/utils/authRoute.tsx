@@ -1,6 +1,6 @@
-import { AuthContext } from "./../context/context";
 import { useContext } from "react";
 import { Redirect, Route, RouteComponentProps } from "react-router-dom";
+import { AuthContext } from "../context/auth";
 
 interface CheckAuthProps {
   Component: React.FC<RouteComponentProps>;
@@ -13,14 +13,14 @@ const CheckAut = ({
   path,
   exact = false,
 }: CheckAuthProps): JSX.Element => {
-  const { auth } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   return (
     <Route
       exact={exact}
       path={path}
       render={(props) =>
-        !auth ? (
+        !user ? (
           <Component {...props} />
         ) : (
           <Redirect

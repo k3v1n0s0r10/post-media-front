@@ -1,0 +1,33 @@
+.create-post-container {
+  height: 30vh;
+  width: 100%;
+  border-radius: 1rem;
+  margin: 2rem;
+  overflow: hidden;
+  background-color: white;
+  padding: 2rem;
+
+  box-shadow: 0px 0px 5px rgba($color: black, $alpha: 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  button {
+    background-color: var(--main-blue);
+    color: white;
+    padding: 1rem;
+    border-radius: 1rem;
+    font-size: 1.8rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .create-post-container {
+    width: 35rem;
+    height: 20rem;
+  }
+}

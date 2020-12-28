@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import useLogin from "../../hooks/useLogin";
 import useForm from "../../hooks/useForm";
 import Input from "../../components/formComponents/input/Input";
+import ErrorMessage from "../../components/ErrorMessage";
 
 import "./signIn.scss";
 
@@ -43,12 +44,7 @@ const SignIn: React.FC = () => {
           Sign in
         </motion.button>
         {errors &&
-          errors.map((msg) => (
-            <p className="error-msg">
-              <i className="fas fa-times" />
-              {msg}
-            </p>
-          ))}
+          errors.map((msg, idx) => <ErrorMessage key={idx} msg={msg} />)}
       </form>
     </div>
   );

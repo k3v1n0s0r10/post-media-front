@@ -16,6 +16,12 @@ nav {
   p {
     margin: 0 1rem;
     font-size: 1.4rem;
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+      cursor: pointer;
+      color: var(--main-blue);
+    }
   }
 }
 
