@@ -8,12 +8,9 @@ import { useHistory } from "react-router-dom";
 const useRegister = () => {
   const { login } = useContext(AuthContext);
   const [errors, setErrors] = useState<Array<any>>([]);
-  const [sendRegister, { error, loading, client }] = useMutation(
-    REGISTER_MUTATION,
-    {
-      errorPolicy: "all",
-    }
-  );
+  const [sendRegister, { loading }] = useMutation(REGISTER_MUTATION, {
+    errorPolicy: "all",
+  });
 
   const history = useHistory();
 

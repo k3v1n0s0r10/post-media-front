@@ -1,9 +1,5 @@
 import { gql } from "@apollo/client";
 
-interface Post {
-  id: string;
-}
-
 const REGISTER_MUTATION = gql`
   mutation register(
     $username: String!

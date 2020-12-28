@@ -1,8 +1,6 @@
-import { useMutation } from "@apollo/client";
 import { UserInterface } from "../../context/auth";
 import useDeletePost from "../../graphql/useDeletePost";
 import useLikePost from "../../graphql/useLikePost";
-import { DELETE_POST_MUTATION, GET_POSTS_QUERY } from "../../utils/graphql";
 
 interface PostFooterProps {
   likeCount: string;
