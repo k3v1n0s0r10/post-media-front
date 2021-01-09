@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import useCreatePost from "../../graphql/useCreatePost";
+import useCreatePost from "../../graphql/api/useCreatePost";
 import ErrorMessage from "../ErrorMessage";
 import Input from "../formComponents/input/Input";
 
@@ -27,6 +27,7 @@ const CreatePost: React.FC = () => {
           setPostData(e.target.value)
         }
         maxLength={60}
+        autocomplete="off"
         required
       />
       <p>{postData.length}/60</p>

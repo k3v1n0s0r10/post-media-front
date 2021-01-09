@@ -6,7 +6,7 @@ import Loader from "../../components/Loader";
 
 import PostItem from "../../components/postItem/PostItem";
 import { AuthContext } from "../../context/auth";
-import { GET_POSTS_QUERY } from "../../utils/graphql";
+import { GET_POSTS_QUERY } from "../../graphql/queries";
 
 import "./home.scss";
 

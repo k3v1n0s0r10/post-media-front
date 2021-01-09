@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-import useLogin from "../../hooks/useLogin";
+import useLogin from "../../graphql/api/useLogin";
 import useForm from "../../hooks/useForm";
 import Input from "../../components/formComponents/input/Input";
 import ErrorMessage from "../../components/ErrorMessage";

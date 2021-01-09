@@ -1,5 +1,6 @@
 import { useMutation } from "@apollo/client";
-import { CREATE_POST_MUTATION, GET_POSTS_QUERY } from "../utils/graphql";
+import { CREATE_POST_MUTATION } from "../mutations";
+import { GET_POSTS_QUERY } from "../queries";
 
 const useCreatePost = () => {
   const [sendPost, { loading, error, client }] = useMutation(

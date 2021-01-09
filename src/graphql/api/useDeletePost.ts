@@ -1,5 +1,6 @@
 import { useMutation } from "@apollo/client";
-import { DELETE_POST_MUTATION, GET_POSTS_QUERY } from "../utils/graphql";
+import { DELETE_POST_MUTATION } from "../mutations";
+import { GET_POSTS_QUERY } from "../queries";
 
 const useDeletePost = () => {
   const [sendDeletePost, { loading, client }] = useMutation(

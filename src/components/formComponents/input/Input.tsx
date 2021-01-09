@@ -13,6 +13,7 @@ interface InputProps {
   onChange: any;
   error?: string;
   maxLength?: number;
+  autocomplete?: "on" | "off";
 }
 
 const Input: React.FC<InputProps> = ({
@@ -23,6 +24,7 @@ const Input: React.FC<InputProps> = ({
   onChange,
   error,
   maxLength,
+  autocomplete = "on",
   ...rest
 }) => {
   const inputRef = useRef(null);
@@ -40,6 +42,7 @@ const Input: React.FC<InputProps> = ({
         onChange={onChange}
         type={type}
         value={value}
+        autoComplete={autocomplete}
         maxLength={maxLength}
         {...rest}
       />

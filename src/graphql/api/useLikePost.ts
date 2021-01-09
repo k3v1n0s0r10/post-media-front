@@ -1,5 +1,6 @@
 import { useMutation } from "@apollo/client";
-import { GET_POSTS_QUERY, LIKE_POST_MUTATION } from "../utils/graphql";
+import { LIKE_POST_MUTATION } from "../mutations";
+import { GET_POSTS_QUERY } from "../queries";
 
 const useLikePost = () => {
   const [sendLike, { loading, client, error }] = useMutation(

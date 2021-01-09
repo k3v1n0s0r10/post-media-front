@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
+
 import ErrorMessage from "../../components/ErrorMessage";
 import Input from "../../components/formComponents/input/Input";
-import useRegister from "../../graphql/useRegister";
+import useRegister from "../../graphql/api/useRegister";
 import useForm from "../../hooks/useForm";
 
 import "./signUp.scss";

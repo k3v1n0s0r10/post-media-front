@@ -21,25 +21,6 @@ const REGISTER_MUTATION = gql`
   }
 `;
 
-const GET_POSTS_QUERY = gql`
-  query {
-    getPosts {
-      id
-      body
-      username
-      likeCount
-      commentCount
-      createdAt
-      likes {
-        username
-      }
-      comments {
-        username
-      }
-    }
-  }
-`;
-
 const CREATE_POST_MUTATION = gql`
   mutation createPost($body: String!) {
     createPost(body: $body) {
@@ -85,7 +66,6 @@ const LIKE_POST_MUTATION = gql`
 `;
 
 export {
-  GET_POSTS_QUERY,
   CREATE_POST_MUTATION,
   DELETE_POST_MUTATION,
   LIKE_POST_MUTATION,

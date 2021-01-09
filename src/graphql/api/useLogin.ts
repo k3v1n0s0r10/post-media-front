@@ -1,14 +1,21 @@
 import { useContext, useState } from "react";
-import { ApolloError, useMutation } from "@apollo/client";
-
-import { AuthContext } from "../context/auth";
-import { REGISTER_MUTATION } from "../utils/graphql";
+import { ApolloError, gql, useMutation } from "@apollo/client";
 import { useHistory } from "react-router-dom";
+import { AuthContext } from "../../context/auth";
 
-const useRegister = () => {
+const LOGIN_MUTATION = gql`
+  mutation Login($username: String!, $password: String!) {
+    login(username: $username, password: $password) {
+      username
+      token
+    }
+  }
+`;
+
+const useLogin = () => {
   const { login } = useContext(AuthContext);
   const [errors, setErrors] = useState<Array<any>>([]);
-  const [sendRegister, { loading }] = useMutation(REGISTER_MUTATION, {
+  const [sendUser, { loading }] = useMutation(LOGIN_MUTATION, {
     errorPolicy: "all",
   });
 
@@ -16,27 +23,20 @@ const useRegister = () => {
 
   const handleSubmit = (
     e: React.FormEvent<HTMLFormElement>,
-    formData: {
-      username: string;
-      password: string;
-      confirmPassword: string;
-      email: string;
-    }
+    formData: { username: string; password: string }
   ) => {
     e.preventDefault();
 
-    sendRegister({
+    sendUser({
       variables: {
         username: formData.username,
-        email: formData.email,
         password: formData.password,
-        confirmPassword: formData.confirmPassword,
       },
     })
       .then(({ data, errors }) => {
         if (data) {
           setErrors([]);
-          login(data.register);
+          login(data.login);
           history.replace("/");
         } else if (errors) {
           const errObj = errors[0].extensions?.errors;
@@ -58,4 +58,4 @@ const useRegister = () => {
   return { handleSubmit, loading, errors };
 };
 
-export default useRegister;
+export default useLogin;

@@ -1,6 +1,6 @@
 import { UserInterface } from "../../context/auth";
-import useDeletePost from "../../graphql/useDeletePost";
-import useLikePost from "../../graphql/useLikePost";
+import useDeletePost from "../../graphql/api/useDeletePost";
+import useLikePost from "../../graphql/api/useLikePost";
 
 interface PostFooterProps {
   likeCount: string;
