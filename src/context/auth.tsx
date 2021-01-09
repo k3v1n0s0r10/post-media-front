@@ -33,7 +33,7 @@ if (token) {
 
 const AuthContext = createContext<AuthInterface>({
   user: null,
-  login: (data) => {},
+  login: () => {},
   logout: () => {},
 });
 

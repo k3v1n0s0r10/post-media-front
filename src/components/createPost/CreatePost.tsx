@@ -26,11 +26,14 @@ const CreatePost: React.FC = () => {
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setPostData(e.target.value)
         }
+        maxLength={60}
         required
       />
+      <p>{postData.length}/60</p>
       <motion.button disabled={loading} type="submit">
         Create post
       </motion.button>
+
       {error && <ErrorMessage msg={error.message} />}
     </form>
   );

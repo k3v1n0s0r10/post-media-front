@@ -36,10 +36,14 @@
   }
 
   .post-body {
+    overflow: hidden;
+
     p {
       font-size: 1.8rem;
       color: gray;
       padding: 1rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 

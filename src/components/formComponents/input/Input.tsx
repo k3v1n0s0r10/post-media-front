@@ -12,6 +12,7 @@ interface InputProps {
   label: string;
   onChange: any;
   error?: string;
+  maxLength?: number;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -21,6 +22,7 @@ const Input: React.FC<InputProps> = ({
   value,
   onChange,
   error,
+  maxLength,
   ...rest
 }) => {
   const inputRef = useRef(null);
@@ -38,6 +40,7 @@ const Input: React.FC<InputProps> = ({
         onChange={onChange}
         type={type}
         value={value}
+        maxLength={maxLength}
         {...rest}
       />
       {error && <p>{error}</p>}
