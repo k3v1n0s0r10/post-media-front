@@ -1,8 +1,11 @@
+import { useContext } from "react";
 import { useMutation } from "@apollo/client";
 import { CREATE_POST_MUTATION } from "../mutations";
 import { GET_POSTS_QUERY } from "../queries";
+import { AuthContext } from "../../context/auth";
 
 const useCreatePost = () => {
+  const { logout } = useContext(AuthContext);
   const [sendPost, { loading, error, client }] = useMutation(
     CREATE_POST_MUTATION,
     {
@@ -32,8 +35,9 @@ const useCreatePost = () => {
           };
 
           client.writeQuery({ query: GET_POSTS_QUERY, data: newData });
-        } else {
-          console.error(errors);
+        } else if (errors) {
+          if (errors[0].message === "Invalid/Expired token") logout();
+          else console.error(errors);
         }
       })
       .catch((err) => console.error(err));

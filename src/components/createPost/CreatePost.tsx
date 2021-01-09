@@ -30,9 +30,9 @@ const CreatePost: React.FC = () => {
         autocomplete="off"
         required
       />
-      <p>{postData.length}/60</p>
+      <p className="length-text">{postData.length}/60</p>
       <motion.button disabled={loading} type="submit">
-        Create post
+        {loading ? "..." : "Create post"}
       </motion.button>
 
       {error && <ErrorMessage msg={error.message} />}

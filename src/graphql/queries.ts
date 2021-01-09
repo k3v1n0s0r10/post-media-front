@@ -12,9 +12,6 @@ const GET_POSTS_QUERY = gql`
       likes {
         username
       }
-      comments {
-        username
-      }
     }
   }
 `;

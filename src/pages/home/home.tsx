@@ -1,11 +1,13 @@
 import { useQuery } from "@apollo/client";
 import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import CreatePost from "../../components/createPost/CreatePost";
 import Loader from "../../components/Loader";
 
 import PostItem from "../../components/postItem/PostItem";
+import SinglePost from "../../components/singlePost/SinglePost";
 import { AuthContext } from "../../context/auth";
+import { PostContext } from "../../context/post";
 import { GET_POSTS_QUERY } from "../../graphql/queries";
 
 import "./home.scss";
@@ -24,8 +26,8 @@ const postsAnimation = {
 
 const Home: React.FC = () => {
   const { user } = useContext(AuthContext);
+  const { post, setPost } = useContext(PostContext);
   const { data, loading } = useQuery(GET_POSTS_QUERY);
-  const [selected, setSelected] = useState({ idx: "", id: "" });
 
   return (
     <AnimateSharedLayout type="crossfade">
@@ -41,23 +43,12 @@ const Home: React.FC = () => {
           <Loader size={10} />
         ) : (
           data &&
-          data.getPosts.map((el: any, idx: number) => (
-            <PostItem key={el.id} setSelected={setSelected} idx={idx} {...el} />
+          data.getPosts.map((post: any, idx: number) => (
+            <PostItem key={idx} idx={idx} post={post} />
           ))
         )}
 
-        <AnimatePresence>
-          {selected.id && (
-            <motion.div className="post-open" layout>
-              <PostItem
-                {...data.getPosts[selected.idx]}
-                idx={selected.idx}
-                setSelected={setSelected}
-                selected
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <AnimatePresence>{post && <SinglePost post={post} />}</AnimatePresence>
       </motion.div>
     </AnimateSharedLayout>
   );

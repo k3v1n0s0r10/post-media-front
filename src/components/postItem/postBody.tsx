@@ -1,11 +1,17 @@
+import { useContext } from "react";
+import { PostInterface } from "../../@types/post";
+import { PostContext } from "../../context/post";
+
 interface PostBodyProps {
-  body: string;
+  post: PostInterface;
 }
 
-const PostBody: React.FC<PostBodyProps> = ({ body }) => {
+const PostBody: React.FC<PostBodyProps> = ({ post }) => {
+  const { setPost } = useContext(PostContext);
+
   return (
-    <div className="post-body">
-      <p>{body}</p>
+    <div onClick={() => setPost(post)} className="post-body">
+      <p>{post.body}</p>
     </div>
   );
 };

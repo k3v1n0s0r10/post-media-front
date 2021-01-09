@@ -9,20 +9,23 @@ import { AuthProvider } from "./context/auth";
 import CheckAuth from "./utils/authRoute";
 
 import "./App.scss";
+import { PostProvider } from "./context/post";
 
 const App: React.FC = () => {
   return (
     <div className="App">
       <AuthProvider>
-        <Router>
-          <NavBar />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <CheckAuth exact path="/sign-in" Component={SignIn} />
-            <CheckAuth exact path="/sign-up" Component={SignUp} />
-            <CheckAuth path="*" Component={SignUp} />
-          </Switch>
-        </Router>
+        <PostProvider>
+          <Router>
+            <NavBar />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <CheckAuth exact path="/sign-in" Component={SignIn} />
+              <CheckAuth exact path="/sign-up" Component={SignUp} />
+              <CheckAuth path="*" Component={SignUp} />
+            </Switch>
+          </Router>
+        </PostProvider>
       </AuthProvider>
     </div>
   );

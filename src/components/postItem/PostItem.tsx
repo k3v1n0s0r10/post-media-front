@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { Dispatch, SetStateAction, useContext } from "react";
+import { useContext } from "react";
+import { PostInterface } from "../../@types/post";
 import { AuthContext } from "../../context/auth";
 import PostBody from "./postBody";
 import PostFooter from "./postFooter";
@@ -7,16 +8,8 @@ import PostHeader from "./postHeader";
 import "./postItem.scss";
 
 interface Props {
-  body: string;
-  id: string;
-  username: string;
-  likeCount: string;
-  commentCount: string;
-  createdAt: string;
-  setSelected: Dispatch<SetStateAction<{ id: string; idx: string }>>;
-  idx: any;
-  selected?: boolean;
-  likes: Array<{ username: string }>;
+  post: PostInterface;
+  idx: number;
 }
 
 const itemAnimation = {
@@ -27,37 +20,18 @@ const itemAnimation = {
   },
 };
 
-const PostItem = ({
-  body,
-  id,
-  username,
-  createdAt,
-  commentCount,
-  likeCount,
-  setSelected,
-  idx,
-  selected,
-  likes,
-}: Props) => {
+const PostItem: React.FC<Props> = ({ post, idx }) => {
   const { user } = useContext(AuthContext);
 
   return (
     <motion.div
-      layoutId={id}
+      layoutId={post.id}
+      className="post-item"
       variants={itemAnimation}
-      className={`post-item ${selected ? "selected" : ""}`}
     >
-      <PostHeader username={username} createdAt={createdAt} />
-      <PostBody body={body} />
-      <PostFooter
-        commentCount={commentCount}
-        likeCount={likeCount}
-        username={username}
-        likes={likes}
-        id={id}
-        idx={idx}
-        user={user}
-      />
+      <PostHeader post={post} />
+      <PostBody post={post} />
+      <PostFooter post={post} idx={idx} user={user} />
     </motion.div>
   );
 };

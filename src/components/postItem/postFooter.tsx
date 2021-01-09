@@ -1,28 +1,19 @@
+import { PostInterface } from "../../@types/post";
 import { UserInterface } from "../../context/auth";
 import useDeletePost from "../../graphql/api/useDeletePost";
 import useLikePost from "../../graphql/api/useLikePost";
 
 interface PostFooterProps {
-  likeCount: string;
-  commentCount: string;
-  username: string;
-  likes: Array<{ username: string }>;
-  user: UserInterface | null;
-  id: string;
+  post: PostInterface;
   idx: number;
+  user: UserInterface | null;
 }
 
-const PostFooter: React.FC<PostFooterProps> = ({
-  likeCount,
-  commentCount,
-  username,
-  likes,
-  user,
-  idx,
-  id,
-}) => {
+const PostFooter: React.FC<PostFooterProps> = ({ post, user, idx }) => {
   const { loading: likeLoading, handleLike } = useLikePost();
   const { loading: deleteLoading, deletePost } = useDeletePost();
+
+  const { likes, likeCount, id, commentCount, username } = post;
 
   const isLiked =
     user &&

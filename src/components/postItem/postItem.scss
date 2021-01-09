@@ -28,10 +28,15 @@
       background-color: white;
       padding: 0.5rem;
       border-radius: 1rem;
+      flex: 1;
     }
 
     span {
       text-transform: capitalize;
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      flex: 3;
     }
   }
 
